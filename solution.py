@@ -46,11 +46,13 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
     ):
         return empty_df
 
-    if operator == "+":
-        df[new_column] = df[col1] + df[col2]
-    elif operator == "-":
-        df[new_column] = df[col1] - df[col2]
-    elif operator == "*":
-        df[new_column] = df[col1] * df[col2]
+    result_df = df.copy()
 
-    return df
+    if operator == "+":
+        result_df[new_column] = result_df[col1] + result_df[col2]
+    elif operator == "-":
+        result_df[new_column] = result_df[col1] - result_df[col2]
+    elif operator == "*":
+        result_df[new_column] = result_df[col1] * result_df[col2]
+
+    return result_df
