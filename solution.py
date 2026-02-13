@@ -58,3 +58,12 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
         result_df[new_column] = result_df[col1] * result_df[col2]
 
     return result_df
+
+
+if __name__ == "__main__":
+    data = {"name": ["banana", "apple"], "quantity": [10, 3], "price": [10, 1]}
+    fruits_sales = pd.DataFrame(data)
+    print(f"Original DataFrame:\n{fruits_sales}")
+
+    sales_total = add_virtual_column(fruits_sales, "quantity * price", "total")
+    print(f"\nResults:\n{sales_total}")
