@@ -21,6 +21,12 @@ The task was to create a function that adds a new column to a pandas DataFrame b
 pip install -r requirements.txt
 ```
 
+**Run example script**:
+
+```bash
+python3 solution.py
+```
+
 **Run tests**:
 
 ```bash
