@@ -12,3 +12,17 @@ The task was to create a function that adds a new column to a pandas DataFrame b
 
 - **Python 3.x**
 - **Pandas**
+
+## How to run
+
+**Install dependencies**:
+
+```bash
+pip install -r requirements.txt
+```
+
+**Run tests**:
+
+```bash
+pytest
+```
