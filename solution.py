@@ -9,7 +9,7 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
     print()
 
     def is_valid(label):
-        if len(label) == 0 or not isinstance(label, str):
+        if not isinstance(label, str) or len(label) == 0:
             return False
         for char in label:
             if not (char.isalpha() or char == "_"):
@@ -20,8 +20,37 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
         return empty_df
 
     for col in df.columns:
-        print(f"col: {col}")
+        # print(f"col: {col}")
         if not is_valid(col):
             return empty_df
 
-    return empty_df
+    operator = None
+    for op in ["+", "-", "*"]:
+        if op in role:
+            operator = op
+            break
+    if operator is None:
+        return empty_df
+
+    role_split = role.split(operator)
+    print(f"splitted role: {role_split}")
+    if len(role_split) != 2:
+        return empty_df
+
+    col1 = role_split[0].strip()
+    col2 = role_split[1].strip()
+    print(f"col1: {col1}, col2: {col2}")
+
+    if not (
+        is_valid(col1) and is_valid(col2) and col1 in df.columns and col2 in df.columns
+    ):
+        return empty_df
+
+    if operator == "+":
+        df[new_column] = df[col1] + df[col2]
+    elif operator == "-":
+        df[new_column] = df[col1] - df[col2]
+    elif operator == "*":
+        df[new_column] = df[col1] * df[col2]
+
+    return df
